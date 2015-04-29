@@ -4,3 +4,6 @@
 [submodule "lfui"]
 	path = lfui
 	url = https://github.com/jgrizou/lfui
+[submodule "bci_thesis"]
+	path = bci_thesis
+	url = https://github.com/jgrizou/bci_thesis
