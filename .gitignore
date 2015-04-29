@@ -1,1 +1,11 @@
 data
+online/results
+online/analysis
+online/plot
+offline/subjectDispatcher
+offline/samplingEEG/wait_jobs
+offline/samplingEEG/run_jobs
+offline/samplingEEG/end_jobs
+offline/samplingEEG/results
+offline/samplingEEG/analysis
+offline/samplingEEG/plots
