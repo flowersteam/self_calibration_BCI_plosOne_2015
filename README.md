@@ -47,7 +47,7 @@ Finally, add the files from the [plosOne release](https://github.com/flowersteam
 
 If you want to enter into the code, we recommend to start exploring the following repository https://github.com/jgrizou/lfui. You will find there a simple annotated example of the self-calibration code under example/gridworld/run_gridworld.m
 
-We recommend the following papers for more details on the algortihm. 
+We recommend the following papers for more details on the algortihm:
 
  - [1] Calibration-free BCI based control. Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M.. AAAI Conference on Artificial Intelligence, 2014. [[pdf]](https://hal.archives-ouvertes.fr/hal-00984068/document) [[bib]](https://hal.archives-ouvertes.fr/hal-00984068v1/bibtex) [[sources]](https://github.com/jgrizou/paper_conference_aaai_2014)
 
