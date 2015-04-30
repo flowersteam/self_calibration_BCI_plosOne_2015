@@ -32,7 +32,9 @@ Finally, add the files from the [plosOne release](https://github.com/flowersteam
 
 - The data/experiments_selfCalibration folder ([data_2.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/data_2.zip)) contains the processed data from the online experiments. EEG are processed and formatted as detailled in the paper and are associated with more information about the task and the evolution of our algorithm state. Some of these files are used for the analysis of the online results, see online folder description below.
 
-- The online folder contains the code to analyse the online experiments as presented in the paper. Run the processData.m script to generate the analysis, and the plotData.m script to visualize useful information. The analysis files can also be downloaded from the release: ([online.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/online.zip)). Do not forget to add the following folders to the Matlab path: bci_thesis, lfui, matlab_tools.
+- The online folder contains the code to analyse the online experiments as presented in the paper. Run the processData.m script to generate the analysis, and the plotData.m script to visualize useful information. The analysis files can also be downloaded from the release: [online.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/online.zip). 
+
+  Do not forget to add the following folders to the Matlab path: bci_thesis, lfui, matlab_tools.
 
 - The offline folder contains the code to run the offline analysis comparing our self-calibration algortihm with the calibrated case using the acquired EEG data. To repeat the experiments:
   * create some jobs using the offline/samplingEEG/create_jobs.m script using the parameters you want to evaluate. Then run the offline/run_samplingEEG.m script to execute all the created jobs. Results of each individual run are stored under offline/samplingEEG/results. 
