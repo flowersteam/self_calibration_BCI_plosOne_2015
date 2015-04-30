@@ -47,15 +47,15 @@ If you want to enter into the code, we recommend to start exploring the followin
 
 We recommend the following papers for more details on the algortihm. 
 
-[1] Calibration-free BCI based control. Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M.. AAAI Conference on Artificial Intelligence, 2014. [[pdf]](https://hal.archives-ouvertes.fr/hal-00984068/document) [[bib]](https://hal.archives-ouvertes.fr/hal-00984068v1/bibtex) [[sources]](https://github.com/jgrizou/paper_conference_aaai_2014)
+ - [1] Calibration-free BCI based control. Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M.. AAAI Conference on Artificial Intelligence, 2014. [[pdf]](https://hal.archives-ouvertes.fr/hal-00984068/document) [[bib]](https://hal.archives-ouvertes.fr/hal-00984068v1/bibtex) [[sources]](https://github.com/jgrizou/paper_conference_aaai_2014)
 
-[2] Interactive learning from unlabeled instructions. Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M.. UAI Conference on Uncertainty in Artificial Intelligence, 2014. [[pdf]](https://hal.archives-ouvertes.fr/hal-01007689/document) [[bib]](https://hal.archives-ouvertes.fr/hal-01007689v1/bibtex) [[sources]](https://github.com/jgrizou/paper_conference_uai_2014)
+ - [2] Interactive learning from unlabeled instructions. Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M.. UAI Conference on Uncertainty in Artificial Intelligence, 2014. [[pdf]](https://hal.archives-ouvertes.fr/hal-01007689/document) [[bib]](https://hal.archives-ouvertes.fr/hal-01007689v1/bibtex) [[sources]](https://github.com/jgrizou/paper_conference_uai_2014)
 
 For even more details and illustrative drawings of these ideas, please refer to the following thesis:
 
-[3] Learning from Unlabeled Interaction Frames. PhD thesis. Université de Bordeaux, 2014. [[pdf]](https://www.dropbox.com/s/qsi54zsnsr2cn60/Thesis_Jonathan_Grizou.pdf?dl=0) [[bib]](https://hal.inria.fr/tel-01095562v1/bibtex) [[sources]](https://github.com/jgrizou/thesis_manuscript) [[code]](https://github.com/jgrizou/thesis_code) [[defense]](https://www.youtube.com/watch?v=w62IF3qj8-E) [[slides]](https://www.dropbox.com/s/7ubezx0ln82f0nh/thesis_slides_V3.pdf?dl=0)
+ - [3] Learning from Unlabeled Interaction Frames. PhD thesis. Université de Bordeaux, 2014. [[pdf]](https://www.dropbox.com/s/qsi54zsnsr2cn60/Thesis_Jonathan_Grizou.pdf?dl=0) [[bib]](https://hal.inria.fr/tel-01095562v1/bibtex) [[sources]](https://github.com/jgrizou/thesis_manuscript) [[code]](https://github.com/jgrizou/thesis_code) [[defense]](https://www.youtube.com/watch?v=w62IF3qj8-E) [[slides]](https://www.dropbox.com/s/7ubezx0ln82f0nh/thesis_slides_V3.pdf?dl=0)
 
 For more details about the use of Errps in BCI control tasks, please refer to:
 
-[4] Shared-control brain-computer interface for a two dimensional reaching task using EEG error-related potentials. Iturrate, I., Montesano, L., & Minguez, J.. In Engineering in Medicine and Biology Society (EMBC), 2013. [[pdf]](http://webdiis.unizar.es/~jminguez/articles/EMBC13_ErrorControl.pdf) [[bib]](http://scholar.google.fr/scholar.bib?q=info:c8V1jxaudtoJ:scholar.google.com/&output=citation&scisig=AAGBfm0AAAAAVUIxGugkmdgbgY6hcoMLM9Vkjzt_vh5K&scisf=4&hl=en)
+ - [4] Shared-control brain-computer interface for a two dimensional reaching task using EEG error-related potentials. Iturrate, I., Montesano, L., & Minguez, J.. In Engineering in Medicine and Biology Society (EMBC), 2013. [[pdf]](http://webdiis.unizar.es/~jminguez/articles/EMBC13_ErrorControl.pdf) [[bib]](http://scholar.google.fr/scholar.bib?q=info:c8V1jxaudtoJ:scholar.google.com/&output=citation&scisig=AAGBfm0AAAAAVUIxGugkmdgbgY6hcoMLM9Vkjzt_vh5K&scisf=4&hl=en)
 
