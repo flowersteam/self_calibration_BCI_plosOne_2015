@@ -18,7 +18,7 @@ cd matlab_tools
 git submodule init
 git submodule update
 ```
-*Note: If you really don't want to use git, the result of the above commands are in the [AllSourceCode.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/AllSourceCode.zip) file from the [plosOne release](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/tag/plosOne).*
+*Note: If you really don't want to use git, the result of the above commands are in the [self_calibration_BCI_plosOne_2015.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/self_calibration_BCI_plosOne_2015.zip) file from the [plosOne release](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/tag/plosOne).*
 
 Finally, add the files from the [plosOne release](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/tag/plosOne) following the path given in their respective zip folder:
 - [data_1.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/data_1.zip) contains the "raw_data" folder which should be located under "data/raw_data".
