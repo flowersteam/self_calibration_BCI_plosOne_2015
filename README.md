@@ -1,13 +1,9 @@
 This folder contains the code associated to the following paper:
 
-## Title
+**Title**: Exploiting task constraints for self-calibrated brain-machine interface control using error-related potentials.
+**Authors**: I. Iturrate, J. Grizou, J. Omedes, P-Y. Oudeyer, M. Lopes and L. Montesano
 
-Exploiting task constraints for self-calibrated brain-machine interface control using error-related potentials.
-I. Iturrate, J. Grizou, J. Omedes, P-Y. Oudeyer, M. Lopes and L. Montesano
-
-## Abstract
-
-This paper presents a new approach for self-calibration BCI for reaching tasks using error-related potentials. The proposed method exploits task constraints to simultaneously calibrate the decoder and control the device, by using a robust likelihood function and an ad-hoc planner to cope with the large uncertainty resulting from the unknown task and decoder. The method has been evaluated in closed-loop online experiments with 8 users using a previously proposed BCI protocol for reaching tasks over a grid. The results show that it is possible to have a usable BCI control from the beginning of the experiment without any prior calibration. Furthermore, comparisons with simulations and previous results obtained using standard calibration hint that both the quality of recorded signals and the performance of the system were comparable to those obtained with a standard calibration approach.
+**Abstract**: This paper presents a new approach for self-calibration BCI for reaching tasks using error-related potentials. The proposed method exploits task constraints to simultaneously calibrate the decoder and control the device, by using a robust likelihood function and an ad-hoc planner to cope with the large uncertainty resulting from the unknown task and decoder. The method has been evaluated in closed-loop online experiments with 8 users using a previously proposed BCI protocol for reaching tasks over a grid. The results show that it is possible to have a usable BCI control from the beginning of the experiment without any prior calibration. Furthermore, comparisons with simulations and previous results obtained using standard calibration hint that both the quality of recorded signals and the performance of the system were comparable to those obtained with a standard calibration approach.
 
 ## Setting up the repository:
 ```
@@ -21,7 +17,13 @@ cd matlab_tools
 git submodule init
 git submodule update
 ```
-Then add the files from this release [provide link to release] following the path given in their zip folders (e.g. raw_data goes under data/raw_data).
+(If you really don't want to use git, the result of the above commands are in the [AllSourceCode.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/AllSourceCode.zip) file from the [plosOne release](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/tag/plosOne).)
+
+Finally, add the files from the [plosOne](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/tag/plosOne) following the path given in their zip folders:
+- [data_1.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/data_1.zip) contains the "raw_data" folder which should be located under "data/raw_data".
+- [data_2.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/data_2.zip) contains the "experiments_selfCalibration" folder which should be located under "data/experiments_selfCalibration".
+- [online.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/online.zip) contains the "analysis" folder which should be located under "online/analysis".
+- [offline.zip](https://github.com/flowersteam/self_calibration_BCI_plosOne_2015/releases/download/plosOne/offline.zip) contains the "analysis" folder which should be located under "offline/samplingEEG/analysis".
 
 ## File organization and usage
 
