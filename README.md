@@ -39,9 +39,9 @@ If you want to enter into the code, we recommend to start exploring the followin
 
 We recommend the following papers for more details on the algortihm. 
 
-[1] Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M. (2014). Calibration-free BCI based control. In Twenty-Eighth AAAI Conference on Artificial Intelligence (pp. 1-8). [provide link to paper]
+[1] Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M. (2014). Calibration-free BCI based control. In Twenty-Eighth AAAI Conference on Artificial Intelligence. [provide link to paper]
 
-[2] Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M. (2014). Interactive learning from unlabeled instructions. In UAI-30th Conference on Uncertainty in Artificial Intelligence (pp. 1-8). [provide link to paper]
+[2] Grizou, J., Iturrate, I., Montesano, L., Oudeyer, P. Y., & Lopes, M. (2014). Interactive learning from unlabeled instructions. In UAI-30th Conference on Uncertainty in Artificial Intelligence. [provide link to paper]
 
 For even more details and illustrative drawings of these ideas, please refer to the following thesis:
 
