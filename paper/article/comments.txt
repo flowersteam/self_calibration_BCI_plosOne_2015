@@ -1,0 +1,14 @@
+- I added some text about the symmetries, beginning of section 2.6.1 inside a \todo{}
+
+- I added some text about planning, again inside a \todo{}. most of the equations for the planning are commented, I am not sure we need to enter into such details.
+
+
+
+comments:
+
+- figure 5: the two figures side to side look similar but say different things. for example on 5a the diagonal is a regression on the point, while in 5b it is a reference (on the line means equal performance, under means calibration is better than self-calibration, and above the reverse). If we have space it might be better to  separate them
+
+- fig 5a) maybe change the y axis between [0,1] or [0.5,1] so the figure looks better. Currently the quality of the data seems to have a high impact on the labelling accuracy, but in fact the impact is minor. At least 90% percent of the label are properly labeled even for bad quality data. (This is assuming the calibrated are the ground truth, it may also be that we are correcting errors from the human with our methods.. but this is impossible to evaluate).
+
+- table 1: maybe we should add one decimal for the simulated results. There is some subject wich end up with 0 #Correct and 0 #Incorrect but yet having a steps to first target < 500 (e.g. s7), which looks weird.
+

@@ -1,0 +1,109 @@
+%!TEX root = ../article/Journal_SelfCalibration.tex
+
+\section{Self-calibration of ErrPs}
+\label{sec:algorithm}
+
+
+\subsection{Problem definition}
+
+We consider interaction sessions where a machine can perform discrete actions from a set of available actions $a \in \mathcal{A}$ in an either discrete or continuous state space $s \in \mathcal{S}$. The user, that wants to achieve a task $\hat{\xi}$, is providing feedback to the machine using some specific signal $e$, represented as a feature vector. The task is sequential meaning it is completed by performing a sequence of actions. The machine ignores the task the user has in mind, as well as the actual meaning of each user's signal. Its objective is to simultaneously solve the task and learn a model for the user's signals. To achieve this, it has access to a sequence of triplets in the form $D_M = \{(s_i, a_i, e_i),\ i = 1,\ldots,M\}$, where $s_i$, $a_i$ and $e_i$ represent, respectively, the state, action and instruction signals at time step $i$. The behavior of the machine is determined by the actions $a\in\mathcal{A}$ and the corresponding transition model $p(s'\mid s,a)$.
+
+We make the following assumptions: \begin{inparaenum}[a)] \item the system has access to a set of tasks $\xi_1,\ldots,\xi_T$ which includes the task the user wants to solve; \item instruction signals $e$ have a finite and discrete number of meanings $l \in \{l_1, l_2, \ldots, l_L\}$; and \item given a task $\xi$ and a state-action pair $(s,a)$, the machine is able to infer the expected label $l$ from the human. \end{inparaenum}
+
+ We assume that given a set of signal-label paris, it is possible to compute a model that generates or classifies signals $e$ into meanings $l$. The parameters of such a model will be denoted by $\theta$ and we assume this mapping between signal $e$ and their label $l$ to be fixed. However this mapping is unknown to the agent at start.
+
+\subsection{Estimating Tasks Likelihoods}
+
+We start by assuming we are provided a signal decoder $\hat{\theta}$ and relax this assumption later on.
+%
+As mentioned in the introduction, knowing $\hat{\theta}$, we can compute the probability of each task $\xi_t$ after observation of a signal $e$ when performing action $a$ in state $s$:
+%
+\begin{eqnarray}
+p(\xi_t|e, s, a, \hat{\theta}) & \propto & p(e |s, a, \hat{\theta}, \xi_t) p(\xi_t)
+\label{eq:1}
+\end{eqnarray}
+%
+where  $p(e |s, a, \hat{\theta}, \xi_t)$ needs to take into account the probability of each possible meaning $l$ given the target $\xi_t$, the current state $s$ and the action $a$ executed by the machine:
+%
+\begin{eqnarray}
+p(e |s, a, \hat{\theta}, \xi_t) =  \sum_{k \in {1, \ldots, L}} p(e |l = l_k, \hat{\theta}) p(l = l_k| s, a, \xi_t)
+\end{eqnarray}
+
+This process can be repeated recursively for several interaction steps $i$:
+%
+\begin{eqnarray}
+\L_i^{\xi_t} & = & p(\xi_t|D_i^{\xi_t}, \hat{\theta}) \nonumber \\
+& \propto & p(e_i |s_i, a_i, \hat{\theta},\xi_t) p(\xi_t|D_{i-1}^{\xi_t}, \hat{\theta})
+\label{eq:filter}
+\end{eqnarray}
+%
+with $p(\xi_t|D_0^{\xi_t}, \hat{\theta})$ being the prior at time 0 (before the experiment starts) for the task $\xi_t$, usually uniform over the task distribution. 
+
+We now relax the assumption we are given a model $\hat{\theta}$. The natural extension from the previous models is to compute the posterior distribution over the task and the model, $p(\xi, \theta |e, s, a)$. However, the resulting distribution does not have a close form solution even when linear Gaussian likelihoods are used due to the combination of mixtures for each possible task. Another alternative is to compute the $\theta$ and $\xi$ that maximize the data likelihood. This is prone to fail in certain scenarios due to two reasons. First, it is common that different tasks share many labels (e.g. the policies to reach neighboring cells on a grid world are almost identical and, therefore, share most of the labels $l$) and results on large uncertainties in the task space that require multiple actions to be disambiguated. Second, if the signals are not well separated the meaning parameters $\theta$ of different tasks will not differ much.  
+
+For instance, under Gaussian assumptions for $p(e |l = l_k, \theta)$ and deterministic task labels $p(l = l_k| s, a, \xi)$, it is possible to integrate out  $\theta$ to compute the marginal likelihood $p(D_M\mid \xi)$. The resulting likelihood depends only on the traces of each $p(e |l = l_k, \theta)$. Empirical results with synthetic and EEG data for a reaching task on a grid revealed that, when the distributions over $e$ overlap, the traces were not enough to recover the most likely task and the corresponding meaning parameters. 
+
+To cope with these problems, we define the following pseudo-likelihood function:
+%
+\begin{eqnarray}\label{eq:pseudo1}
+\lefteqn{P(D_M | \xi, \theta) \approx \prod_{i=1}^M p(e_i | s_i, a_i, \xi, \theta_{-i})}  \\ \label{eq:pseudo2}
+&=& \prod_{i=1}^M \sum_{l_c}\sum_l  p(e_i | l_c, \theta_{-i})  p(l_c | l, \theta_{-i}) p(l|s_i,a_i,\xi)
+\label{eq:}
+\end{eqnarray}
+%
+where $l$ represents the meaning assigned by task $\xi$, action $a_i$ and state $s_i$ and $l_c$ is the label corrected based on what we know about our classifier $\theta_{-i}$ for a given label $l$.
+
+The pseudo-likelihood is built using a leave-one-out cross-validation strategy to evaluate the likelihood $p(e_i | s_i, a_i, \xi, \theta_{-i})$ of each signal based on the meaning parameters $\theta_{-i}$ learned for each task using all the other available signals. The use of $\theta_{-i}$ indicates we use a leave one out method. If we interpret $p(e_i | s_i,a_i,\xi,\theta_{-i})$ as a classifier, its predicted labels should match the ones provided by the task for different state-actions pairs. The rationale behind it is that for the correct task, the signals and labels will be more coherent than for other tasks, which we measure as the predictive ability of a classifier trained on the signal-label pairs. Note that wrong tasks will assign wrong labels $l$ to the signals $e$, therefore the learned models will have larger overlaps (see Figure~\ref{fig:planningExplained}c). 
+
+Each term of the pseudo-likelihood is computed from three terms. $p(l|s_i,a_i,\xi)$ represents the probability distributions of the meanings according to a task, the executed action and the current state.   $p(l_c | l, \theta_{-i})$ encodes which label will be actually recovered by $\theta_{-i}$. Intuitively, it models the quality of the model $\theta_{-i}$. $p(e_i | l_c,\theta_{-i})$ is the likelihood of the signal given the meaning. 
+%
+The pseudo-likelihood is maximized in two steps. First, the maximum a posteriori estimate $\theta_{-i}$ of each task is computed. Then, the term $p(l_c | l, \theta_{-i})$ is approximated by the corresponding confusion matrix of the classifier based on $\theta_{-i}$. It is the probability that the classifier itself is reliable in its prediction. Finally, the best task $\xi$ should be the one that maximizes the pseudo-likelihood in Eq. \ref{eq:pseudo1}.
+
+\subsection{Adding power information}
+
+\todo{some part of the appendix belong here, e.g. explanation of how we use the power information}
+
+We can identify two main differences between our self-calibration method and the usual calibration based approaches:
+\begin{enumerate}
+\item \textbf{Online update of multiple classifiers.} Our method integrates new data at each new step, and classifiers can differ between task hypotheses. For incorrect task hypothesis, the signal-label pair added to the training datasets can be incorrect and decrease the performance of the associated classifier. This dynamic can be observed in figure \ref{fig:sequence_evolution}, where classifiers associated to incorrect tasks (in blue) have lower estimated accuracy than the classifiers associated to the correct task (in red). As a result, our algorithm makes different predictions and updates for each hypothesis.
+\item \textbf{Positive/Negative percent ratio of training examples}. Following the literature \cite{chavarriaga2010learning, Iturrate2013task}, the training dataset for calibration based methods was composed of 80 percent of the signals of meaning ``correct'', and only 20 percent of ``incorrect''. The ratio obtained during the self-calibration experiments is more balanced (around 50/50, see Table~\ref{tab:correctLabelRatio}), resulting in classifiers with better properties. But, during online real world experiments, a 50/50 percent ratio may lead to practical problems and should be studied in more details.
+\end{enumerate}
+
+This latter aspect concerning the positive/negative ratio of training example is usually required due to the properties of the signal we seek for in the subjects' brain. Indeed ErrP signals are more powerful when triggered by non-expected movement of the agent, rather than being a voluntary erroneous assessment. In other words, for the ErrP signal to be observable and of good intensity, the user should not expect the agent to make a mistake. This explains why, during the calibration phase of their system, researchers uses 80 percent of the time a correct action (i.e. moving towards the goal), and only 20 percent of the time an incorrect action, which is therefore unexpected \cite{chavarriaga2014errare}. This is possible during a calibration period because both the experiment informs both the user the agent of the task to consider. As the agent knows the task, it can plan its action to maintain an 80/20 percent meaning ratio.
+
+However, in our learning scenario, the agent is not aware of the task the user has in mind. Therefore it is impossible to guarantee an 80/20 percent ratio of positive/negative examples. In practice, using our approach, the agent acquires as many signals of meaning ``correct'' than of meaning ``incorrect'' according to the true intended task, see Table~\ref{tab:correctLabelRatio}.
+
+\begin{table}
+\centering
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{c c c}
+Dataset Accuracies & Self-calibration & Calibration \\ \hline
+50-60 & 0.48 (0.02) & 0.8 (0) \\
+60-70 & 0.50 (0.03) & 0.8 (0) \\
+70-80 & 0.53 (0.03) & 0.8 (0) \\
+80-90 & 0.57 (0.03) & 0.8 (0) \\
+90-100 & 0.59 (0.01) & 0.8 (0) \\
+\end{tabular}
+\caption{Mean ratio of positive examples in the training datasets (standard deviation shown in parenthesis). Calibration procedures for creating a usable dataset of ErrP signals usually account for an 80 percent ratio of positive examples. However, when the task is unknown, it is impossible to guarantee such ratio. In practice, using our self-calibration method, an agent will collect as many positive than negative examples. This is likely to impact the quality of the ErrP signals received from the human brain during online experiments.}
+\label{tab:correctLabelRatio}
+\end{table}
+
+
+
+\subsection{Decision and Task Change}
+
+The machine must decide which task is the correct one. To do so, we define $W^{\xi_t}$ the minimum of pairwise normalized likelihood between hypothesis $\xi_t$ and each other hypothesis: 
+%
+\begin{eqnarray}
+W^{\xi_t} = \min_{x~\in~{1, \ldots, T} \smallsetminus \{t\}} \frac{P(D_M | \xi_t, \theta)}{P(D_M | \xi_t, \theta) + P(D_M | \xi_x, \theta)}
+\label{eq:weight}
+\end{eqnarray}
+
+When it exists a $t$ such that $W^{\xi_t}$ exceeds a threshold $\beta \in ]0.5,1]$ we consider task $\xi_t$ is the one taught by the user.
+
+Once a task is identified with confidence, the robot executes it and prepares to receive instructions from the user to execute a new task. Assuming the user starts teaching a new task using the same kind of signals, we now have much more information about the signal model. Indeed, we are confident that the user was providing instructions related to the previously identified task; therefore we can infer the true labels of the past signals. We can now  assign such labels to all hypothesis and by using the same algorithm we can start learning the new task faster as all hypothesis now share a common set of signal-label pairs. The meaning models for each hypothesis are still updated step after step until the new task is identified and labels reassigned.
+
+\subsection{Planning}
+
+\todo{we should probably not enter into details for the planning and simply refer to the UAI article}
+
