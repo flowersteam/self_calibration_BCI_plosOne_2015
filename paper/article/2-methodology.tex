@@ -9,12 +9,12 @@ The usability of the self-calibration approach was tested under an experimental 
 
 \begin{figure}[!tbp]
 \centering
-%\includegraphics[width=\columnwidth]{figures/experimentalProtocol.eps}
+\includegraphics[width=\columnwidth]{figures/experimentalProtocol.eps}
 \caption{\label{fig:protocol} \textbf{Experimental protocol} (a) Experimental protocol. The protocol showed a $5\times5$ grid with a virtual cursor (green circle) and a goal location (shadowed in red). (b) The cursor could perform five different actions (from top to bottom, move one position up, down, left, right, or performing a goal-reached action). (c) Correct actions (i.e. optimal policy) from each state for the goal exemplified in (a). Extracted from \cite{iturrate13} with permission.}
 \end{figure}
 
 
-Eight subjects (mean age $28 \pm 1.55$ years) participated in the experiments after the protocol was approved by the Institutional Review Board of the University of Zaragoza. All participants were asked to read and sign an informed consent form to participate in the study. The participants were seated on a comfortable chair one meter away from a computer screen that displayed all the information related to the experiment. 
+Eight subjects (mean age $28 \pm 1.55$ years) participated in the experiments after the protocol was approved by the Institutional Review Board of the University of Zaragoza. All participants were asked to read and sign an informed consent form to participate in the study. The participants were seated on a comfortable chair one meter away from a computer screen that displayed all the information related to the experiment.
 %
 %Subjects were assigned accordingly to three different groups, depending on their experience as BMI users: $(i)$ naive BMI users (3 subjects); $(ii)$ usual BMI users, but with no expertise on the current protocol (2 subjects); and $(iii)$ usual BMI users that participated in the protocol previously (see \cite{}), following an standard calibration (2 subjects).
 %
@@ -22,23 +22,23 @@ For the executed experiments we used an unsupervised self-calibration approach (
 
 \subsection{Data recording and feature extraction}
 
-EEG signals were recorded from 16 fronto-central active electrodes using a gTec system, with the ground on AFz and the reference on the left earlobe. EEG data were digitized with a sampling frequency of 256 Hz, power-line notch filtered, and band-pass filtered at $[1, 10]$ Hz. The data acquisition and online processing was developed under a self-made BCI platform. 
+EEG signals were recorded from 16 fronto-central active electrodes using a gTec system, with the ground on AFz and the reference on the left earlobe. EEG data were digitized with a sampling frequency of 256 Hz, power-line notch filtered, and band-pass filtered at $[1, 10]$ Hz. The data acquisition and online processing was developed under a self-made BCI platform.
 %
-In this work, ErrP features were extracted from channels Fz, FCz and Cz within a time window of $[200,800]$ ms downsampled by a factor of 8 (being 0 ms the action onset), forming a vector of $57$ features \cite{chavarriaga2010learning}. 
+In this work, ErrP features were extracted from channels Fz, FCz and Cz within a time window of $[200,800]$ ms downsampled by a factor of 8 (being 0 ms the action onset), forming a vector of $57$ features \cite{chavarriaga2010learning}.
 
 %\todo{After every agent's action, the brain signals from the user are recorded via a computer using a gTec system. To build our feature vector we consider two fronto-central channels (FCz and Cz) in a time window of $[200,700]$ ms (being 0 ms the action onset of the agent) and downsampled the signal to $32$ Hz. Each element of the feature vector is the value in microvolts of the signal at the corresponding time.}
 
 
-% \cite{chavarriaga2010learning, iturrate13}. In this section 
- 
- 
+% \cite{chavarriaga2010learning, iturrate13}. In this section
+
+
 \subsection{Supervised decoding of error potentials}
 
 Before describing the self-calibration method for error-based control, we briefly describe here the supervised approach \cite{chavarriaga2010learning, iturrate13} which will be later extended to an unsupervised setting.
 %
 The decoding of the EEG signals is done using a Gaussian classifier.  The signals are modeled using an independent multivariate normal distribution for each class (i.e. correct denoted as $c$ or error as $w$) \cite{lotte2007review,blankertz2010single}, $\mathcal{N}(\mu_c, \Sigma_c), \mathcal{N}(\mu_w, \Sigma_w)$.  $\theta_k$ denotes  the set of parameters of each class  $\{\mu_k, \Sigma_k\}$ where $k\in\{c,w\}$.
 %
-The covariance matrices $\Sigma_c$ and $\Sigma_w$ are shrinked  ($\lambda = 0.5$) to avoid overfitting when using a large number of features compared to the training number of samples\cite{ledoit2004honey}. 
+The covariance matrices $\Sigma_c$ and $\Sigma_w$ are shrinked  ($\lambda = 0.5$) to avoid overfitting when using a large number of features compared to the training number of samples\cite{ledoit2004honey}.
 
 The probability of a label given a signal is obtained using the Bayes' rule:
 %
@@ -48,15 +48,15 @@ The probability of a label given a signal is obtained using the Bayes' rule:
 \end{eqnarray}
 where $e$ represents the features extracted from the brain signal, $j\in\{c,w\}$ is one of the two classes to be decoded.
 %
-As we do not have a priori knowledge on the user intended assessment of the action, we assume all labels are equi-probables, i.e. $\forall k,~p(l = k) = 0.5$. 
+As we do not have a priori knowledge on the user intended assessment of the action, we assume all labels are equi-probables, i.e. $\forall k,~p(l = k) = 0.5$.
 %
-In this supervised setting, an estimation of the parameters $\hat{\theta}$ is obtained using a set of pairs of signals and labels prior to the actual use of the brain signals. 
+In this supervised setting, an estimation of the parameters $\hat{\theta}$ is obtained using a set of pairs of signals and labels prior to the actual use of the brain signals.
 
 \subsection{Error-potential based control}
 \label{sec:errpcontrol}
-Once trained, the decoder of the previous section can be used to control a device based on the user's assessment of the behavior of the device \cite{iturrate13}. 
+Once trained, the decoder of the previous section can be used to control a device based on the user's assessment of the behavior of the device \cite{iturrate13}.
 %
-The control task is modeled as a Markov decision process (MDP). An MDP is defined by a triplet $(s,a,r)$  where $s\in S$ and $a\in A$ represent the states and actions, and $r$ represents the reward.  Actions modify the state of the system according to the corresponding transition model $p(s'\mid s,a)$. In our grid world protocol, the state represents the cell in the grid and  $p(s'\mid s,a)$ is simply a deterministic transition up, down, left, right, or performing a goal-reached action from the current state $s$ according to the action $a$. The reward function encodes the task, in our case it assigns positive reward to the goal state and zero reward to the others. Given this reward function, it is possible to compute the optimal policy (i.e. a function that gives you the action to execute at each state) that maximizes the accumulated reward. 
+The control task is modeled as a Markov decision process (MDP). An MDP is defined by a triplet $(s,a,r)$  where $s\in S$ and $a\in A$ represent the states and actions, and $r$ represents the reward.  Actions modify the state of the system according to the corresponding transition model $p(s'\mid s,a)$. In our grid world protocol, the state represents the cell in the grid and  $p(s'\mid s,a)$ is simply a deterministic transition up, down, left, right, or performing a goal-reached action from the current state $s$ according to the action $a$. The reward function encodes the task, in our case it assigns positive reward to the goal state and zero reward to the others. Given this reward function, it is possible to compute the optimal policy (i.e. a function that gives you the action to execute at each state) that maximizes the accumulated reward.
 
 Under the assumption that the user follows optimal policies, the ErrP detector can be used to identify the user intended task $\xi = t$ among a finite set of tasks $t = 1,\ldots,T$. Note that this assumption does not contradict the fact that we also assume a non-informative a priori for the labels, as the latter will vary among optimal policies and will depend on the planner.
 
@@ -93,7 +93,7 @@ Self-calibration control can be achieved by exploiting the structure of the task
 where $D_M$ represents the history of triplets $\{a_i, s_i, e_i\}$ up to time $M$.
 The pseudo-likelihood is built using a leave-one-out cross-validation strategy to evaluate the likelihood $p(e_i | s_i, a_i, \xi=t, D_{-i})$ of each signal $e_i$ based on a model learned with all the other signals and corresponding actions and states denoted by $D_{-i}$. For a given target hypothesis $\xi=t$, the labels associated to the signals in $D_{-i}$ can be estimated (i.e. $p(l=k | s_i,a_i, \xi=t)$), enabling the training of a target-specific classifier for each task $\xi=t$. In a nutshell, Eq. \ref{eq:pseudo} assigns higher likelihood to tasks in which their optimal policies match the labels predicted with the model learned with $D_{-i}$. As detailed in \cite{grizou2014interactive}, the underlying assumption is that the subject is coherent throughout the experiment, providing similar signals for the same set of labels.
 
-The pseudo-likelihood is computed from two terms. $p(l=k|s_i,a_i,\xi=t)$ represents the probability distributions of the labels according to a task, the executed action, and the current state. This term only depends on what action is correct at each state according to task $\xi=t$.   
+The pseudo-likelihood is computed from two terms. $p(l=k|s_i,a_i,\xi=t)$ represents the probability distributions of the labels according to a task, the executed action, and the current state. This term only depends on what action is correct at each state according to task $\xi=t$.
 
 The other term, $p(e_i | l=k,\xi=t, D_{-i})$, represents the likelihood of the signal given the label provided by the task and the previous history. In principle, one could use directly the same likelihood model as in Eq. \ref{eq:2}, with $\theta$ estimated from $D_{-i}$. However, such a model results in very fast convergence and a high sensitivity to outliers (e.g. incorrect assessments by the user). In order to improve the robustness of the method, we propose to marginalize out $\theta$  using a non-informative (Jeffrey's) prior (see \cite{gelman2003bayesian}, page 88). The resulting likelihood function is a t-student distribution with heavier tails:
 
@@ -156,12 +156,12 @@ We now describe some implementation details that were used in the experimental e
 \subsubsection{Power information}
 One  critical difficulty of learning from unlabeled signals is for cases where the signals can be interpreted in a symmetric way. In other words, it is possible to obtain the same likelihood by switching the labels. Such misinterpretation is possible in environments with symmetric properties (see \cite{grizou2014interactive} for reaching tasks and \cite{Kindermans2012a,kindermans2014true} for a speller). For the domain of our experiments the symmetries can be disambiguated using the goal reached action, but, in general, symmetric tasks (e.g. opposite corners) will be hard to discriminate and might produce an inconsistent agent behavior.
 
-Prior information about the differences in power between correct and error signals can be used to increase the robustness of the method -- helping to remove world symmetries (e.g. equal likelihood for models with symmetric labels). 
+Prior information about the differences in power between correct and error signals can be used to increase the robustness of the method -- helping to remove world symmetries (e.g. equal likelihood for models with symmetric labels).
 In single trial classification power spectral information results in lower performance than temporal features, but their combination produces more robust detectors \cite{Omedes13ErrPFreq}.
 %
 However, in our case it is possible to exploit the fact that EEG signals associated to the error class have on average higher power than the ones associated to the correct class.
 
-This information is added to the pseudo-likelihood model of Eq. \ref{eq:pseudo} as follows. The average power information of each class is computed as  the weighted mean of the signals' power. The weights are the probabilities of the label given the signal and the class parameters 
+This information is added to the pseudo-likelihood model of Eq. \ref{eq:pseudo} as follows. The average power information of each class is computed as  the weighted mean of the signals' power. The weights are the probabilities of the label given the signal and the class parameters
 %
 \begin{eqnarray}
 p_k(\xi=t) = \frac{\sum_{i = 1}^{M} p(l = k | e_i , \theta_k) ~~ e_i^T e_i}{\sum_{i = 1}^{M} p(l = k | e_i , \theta_k)}.
@@ -177,11 +177,11 @@ The pseudo-likelihood is multiplied by the ratio of the power associated to the 
 \label{eq:power}
 \end{eqnarray}
 
-which assigns, given two symmetric labeling, higher probability to the one where the average power of error  signals is larger.  
+which assigns, given two symmetric labeling, higher probability to the one where the average power of error  signals is larger.
 
 \subsubsection{Identifying the goal}
 \label{sec:confidence}
-A practical issue when running this algorithm is to decide when the task has been successfully identified. This decision has to take into account the uncertainty about the task. We use a thresholding method and define as $W^{t}$ the minimum of pairwise normalized likelihood between tasks $\xi=t$ and all other tasks: 
+A practical issue when running this algorithm is to decide when the task has been successfully identified. This decision has to take into account the uncertainty about the task. We use a thresholding method and define as $W^{t}$ the minimum of pairwise normalized likelihood between tasks $\xi=t$ and all other tasks:
 %
 \begin{eqnarray}
 W^{t} = \min_{x~\in~{1, \ldots, T} \smallsetminus \{t\}} \frac{P(D_M | \theta, \xi=t)}{P(D_M | \theta, \xi=t) + P(D_M | \theta, \xi=x)}
@@ -190,7 +190,7 @@ W^{t} = \min_{x~\in~{1, \ldots, T} \smallsetminus \{t\}} \frac{P(D_M | \theta, \
 
 When it exists a task $\xi=t$ such that $W^{t}$ exceeds a threshold $\beta \in [0.5,1]$ we consider that it is the one the subject has in mind.
 
-Once a task is identified with confidence, the device switches to a greedy policy following the optimal one to reach the estimated goal. Once there, it starts a new task. At this point the device can use the ErrP signals of the previous task as prior information. Indeed, it assigns to the signals the labels of the optimal policy of the identified task.  Note that this prior information is used by the device for all the subsequent error potentials and it results on faster task identification since the classifier parameters are better estimated from the beginning \cite{grizou2014interactive}. In fact, when tasks are correctly identified, the resulting classifier is equivalent to a calibrated one trained with a similar number of ErrP signals. 
+Once a task is identified with confidence, the device switches to a greedy policy following the optimal one to reach the estimated goal. Once there, it starts a new task. At this point the device can use the ErrP signals of the previous task as prior information. Indeed, it assigns to the signals the labels of the optimal policy of the identified task.  Note that this prior information is used by the device for all the subsequent error potentials and it results on faster task identification since the classifier parameters are better estimated from the beginning \cite{grizou2014interactive}. In fact, when tasks are correctly identified, the resulting classifier is equivalent to a calibrated one trained with a similar number of ErrP signals.
 
 \subsection{Self-calibration control analysis}
 
@@ -201,13 +201,3 @@ Secondly, the self-calibration online task was analyzed with the following metri
 Thirdly, the proposed approach was compared with standard calibration procedures. In order to perform this comparison, the important factors to analyze are the quality of the signals acquired, and the labels quality learned from the self-calibration procedure. In principle, if both the signals acquired and labels learned are equivalent to those of a standard calibration, the performance of the system should also be equivalent. To this end, we took advantage of the overlap of three subjects between the current work and our previous work where the protocol was the same but following a classical supervised calibration \cite{iturrate13}. For this analysis, we compared first the quality of the EEG signals in terms of grand averages (error minus correct grand averages); as well as the accuracies obtained during the online control phase following the standard calibration versus the accuracy obtained during the self-calibration session.
 
 Finally, we performed an offline analysis to compare the self-calibration online results with a standard calibration using the same signals acquired during the online experiment. The number of calibration trials required for each subject was estimated by splitting the dataset into a training set formed by 300 trials, and a test set composed of the remaining ones (200). Then, a classifier was trained using an incremental number of trials from the training set and evaluated on the test set. This process was repeated ten times shuffling the order of the trials. The number of trials required for calibration was selected as the one for which the accuracy reached a plateau for at least five consecutive trials. Once a classifier was trained using the computed number of trials, the ErrP-based control algorithm (see subsection \ref{sec:errpcontrol}) was run using the remaining data available. These simulations were run 100 times for each subject to extract the task metrics comparable to those obtained in the self-calibration approach (number of steps needed to reach first target and number of reached targets).
-
-
-
-
-
-
-
-
-
-

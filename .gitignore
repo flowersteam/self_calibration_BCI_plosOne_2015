@@ -9,3 +9,10 @@ offline/samplingEEG/end_jobs
 offline/samplingEEG/results
 offline/samplingEEG/analysis
 offline/samplingEEG/plots
+standard_vs_selfcalibration-eps-converted-to.pdf
+labels_quality-eps-converted-to.pdf
+paper/article/Journal_SelfCalibration.aux
+paper/article/Journal_SelfCalibration.bbl
+paper/article/Journal_SelfCalibration.blg
+paper/article/Journal_SelfCalibration.log
+paper/article/Journal_SelfCalibration.out
