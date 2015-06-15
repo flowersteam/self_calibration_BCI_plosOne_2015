@@ -61,3 +61,7 @@ For more details about the use of Errps in BCI control tasks, please refer to:
 
  - [4] Shared-control brain-computer interface for a two dimensional reaching task using EEG error-related potentials. Iturrate, I., Montesano, L., & Minguez, J.. In Engineering in Medicine and Biology Society (EMBC), 2013. [[pdf]](http://webdiis.unizar.es/~jminguez/articles/EMBC13_ErrorControl.pdf) [[bib]](http://scholar.google.fr/scholar.bib?q=info:c8V1jxaudtoJ:scholar.google.com/&output=citation&scisig=AAGBfm0AAAAAVUIxGugkmdgbgY6hcoMLM9Vkjzt_vh5K&scisf=4&hl=en)
 
+
+### License
+
+The code is under [![GPL V3](https://www.gnu.org/graphics/gplv3-88x31.png)](http://www.gnu.org/licenses/gpl.html) the paper itself is under [![Creative Commons BY-NC-ND](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png) ](http://creativecommons.org/licenses/by-nc-nd/4.0/)
